@@ -35,7 +35,7 @@ interface Props {
   image?: string;
   video?: string;
   links?: readonly {
-    icon: React.ReactNode;
+    icon?: React.ReactNode;
     type: string;
     href: string;
   }[];
@@ -54,6 +54,8 @@ export function ProjectCard({
   links,
   className,
 }: Props) {
+  const hasMedia = Boolean(video || image);
+
   return (
     <div
       className={cn(
@@ -61,30 +63,53 @@ export function ProjectCard({
         className
       )}
     >
-      <div className="relative shrink-0">
-        <Link
-          href={href || "#"}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block"
-        >
-          {video ? (
-            <video
-              src={video}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-48 object-cover"
-            />
-          ) : image ? (
-            <ProjectImage src={image} alt={title} />
-          ) : (
-            <div className="w-full h-48 bg-muted" />
+      {hasMedia ? (
+        <div className="relative shrink-0">
+          <Link
+            href={href || "#"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block"
+          >
+            {video ? (
+              <video
+                src={video}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-48 object-cover"
+              />
+            ) : image ? (
+              <ProjectImage src={image} alt={title} />
+            ) : null}
+          </Link>
+          {links && links.length > 0 && (
+            <div className="absolute top-2 right-2 flex flex-wrap gap-2">
+              {links.map((link, idx) => (
+                <Link
+                  href={link.href}
+                  key={idx}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <Badge
+                    className="flex items-center gap-1.5 text-xs bg-black text-white hover:bg-black/90"
+                    variant="default"
+                  >
+                    {link.icon}
+                    {link.type}
+                  </Badge>
+                </Link>
+              ))}
+            </div>
           )}
-        </Link>
+        </div>
+      ) : null}
+      <div className="p-6 flex flex-col gap-3 flex-1">
         {links && links.length > 0 && (
-          <div className="absolute top-2 right-2 flex flex-wrap gap-2">
+          <div className={cn("flex flex-wrap gap-2", hasMedia && "hidden")}>
             {links.map((link, idx) => (
               <Link
                 href={link.href}
@@ -104,8 +129,6 @@ export function ProjectCard({
             ))}
           </div>
         )}
-      </div>
-      <div className="p-6 flex flex-col gap-3 flex-1">
         <div className="flex items-start justify-between gap-2">
           <div className="flex flex-col gap-1">
             <h3 className="font-semibold">{title}</h3>

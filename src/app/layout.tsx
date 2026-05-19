@@ -1,7 +1,7 @@
 import Navbar from "@/components/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { DATA } from "@/data/resume";
+import { PROFILE } from "@/data/profile";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -21,18 +21,18 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(DATA.url),
+  metadataBase: new URL(PROFILE.url),
   title: {
-    default: DATA.name,
-    template: `%s | ${DATA.name}`,
+    default: PROFILE.name,
+    template: `%s | ${PROFILE.name}`,
   },
-  description: DATA.description,
+  description: PROFILE.description,
   openGraph: {
-    title: `${DATA.name}`,
-    description: DATA.description,
-    url: DATA.url,
-    siteName: `${DATA.name}`,
-    locale: "en_US",
+    title: PROFILE.name,
+    description: PROFILE.description,
+    url: PROFILE.url,
+    siteName: PROFILE.name,
+    locale: "zh_CN",
     type: "website",
   },
   robots: {
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     },
   },
   twitter: {
-    title: `${DATA.name}`,
+    title: PROFILE.name,
     card: "summary_large_image",
   },
   verification: {
@@ -62,7 +62,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="zh-CN" suppressHydrationWarning>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased relative",
@@ -83,7 +83,7 @@ export default function RootLayout({
                 }}
               />
             </div>
-            <div className="relative z-10 max-w-2xl mx-auto py-12 pb-24 sm:py-24 px-6">
+            <div className="relative z-10 mx-auto max-w-3xl px-6 py-12 pb-24 sm:py-24">
               {children}
             </div>
             <Navbar />

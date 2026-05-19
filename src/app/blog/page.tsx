@@ -6,16 +6,16 @@ import { paginate, normalizePage } from "@/lib/pagination";
 import { ChevronRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Blog",
-  description: "Thoughts on software development, life, and more.",
+  title: "技术文章",
+  description: "关于大模型训练系统、Serverless 和云原生工程实践的记录。",
   openGraph: {
-    title: "Blog",
-    description: "Thoughts on software development, life, and more.",
+    title: "技术文章",
+    description: "关于大模型训练系统、Serverless 和云原生工程实践的记录。",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Blog",
-    description: "Thoughts on software development, life, and more.",
+    title: "技术文章",
+    description: "关于大模型训练系统、Serverless 和云原生工程实践的记录。",
   },
 };
 
@@ -47,9 +47,9 @@ export default async function BlogPage({
   return (
     <section id="blog">
       <BlurFade delay={BLUR_FADE_DELAY}>
-        <h1 className="text-2xl font-semibold tracking-tight mb-2">Blog <span className="ml-1 bg-card border border-border rounded-md px-2 py-1 text-muted-foreground text-sm">{sortedPosts.length} posts</span></h1>
+        <h1 className="text-2xl font-semibold mb-2">技术文章 <span className="ml-1 bg-card border border-border rounded-md px-2 py-1 text-muted-foreground text-sm">{sortedPosts.length} 篇</span></h1>
         <p className="text-sm text-muted-foreground mb-8">
-          My thoughts on software development, life, and more.
+          后续会在这里记录大模型训练系统、Serverless 和云原生工程实践。
         </p>
       </BlurFade>
 

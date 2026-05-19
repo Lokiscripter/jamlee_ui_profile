@@ -1,6 +1,6 @@
  
 import { ImageResponse } from "next/og";
-import { DATA } from "@/data/resume";
+import { PROFILE } from "@/data/profile";
 
 export const runtime = "edge";
 
@@ -109,9 +109,9 @@ export default async function Image() {
     try {
         const fontData = await getFontData();
         const title = "Blog";
-        const description = "Thoughts on software development, life, and more.";
-        const imageUrl = DATA.avatarUrl
-            ? new URL(DATA.avatarUrl, DATA.url).toString()
+        const description = "关于大模型训练系统、Serverless 和云原生工程实践的记录。";
+        const imageUrl = PROFILE.avatarUrl
+            ? new URL(PROFILE.avatarUrl, PROFILE.url).toString()
             : undefined;
 
         return new ImageResponse(
@@ -170,5 +170,4 @@ export default async function Image() {
         );
     }
 }
-
 

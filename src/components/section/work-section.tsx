@@ -7,7 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { DATA } from "@/data/resume";
+import { PROFILE } from "@/data/profile";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -33,7 +33,7 @@ function LogoImage({ src, alt }: { src: string; alt: string }) {
 export default function WorkSection() {
   return (
     <Accordion type="single" collapsible className="w-full grid gap-6">
-      {DATA.work.map((work) => (
+      {PROFILE.work.map((work) => (
         <AccordionItem
           key={work.company}
           value={work.company}
@@ -77,11 +77,17 @@ export default function WorkSection() {
             </div>
           </AccordionTrigger>
           <AccordionContent className="p-0 ml-13 text-xs sm:text-sm text-muted-foreground">
-            {work.description}
+            <p>{work.description}</p>
+            {"highlights" in work && work.highlights.length > 0 ? (
+              <ul className="mt-3 list-disc space-y-1 pl-4">
+                {work.highlights.map((highlight) => (
+                  <li key={highlight}>{highlight}</li>
+                ))}
+              </ul>
+            ) : null}
           </AccordionContent>
         </AccordionItem>
       ))}
     </Accordion>
   );
 }
-

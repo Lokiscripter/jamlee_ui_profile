@@ -130,8 +130,9 @@ export default async function BlogPage({
       ) : (
         <BlurFade delay={BLUR_FADE_DELAY * 2}>
           <div className="flex flex-col items-center justify-center py-12 px-4 border border-border rounded-xl">
-            <p className="text-muted-foreground text-center">
-              No blog posts yet. Check back soon!
+            <p className="text-muted-foreground text-center leading-7">
+              暂时还没有公开文章。后续会在这里记录大模型训练系统、
+              Serverless 和云原生工程实践。
             </p>
           </div>
         </BlurFade>

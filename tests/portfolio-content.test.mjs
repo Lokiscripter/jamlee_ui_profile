@@ -66,3 +66,10 @@ test("blog starts without bundled example posts", () => {
   const posts = walkFiles("content").filter((file) => file.endsWith(".mdx"));
   assert.deepEqual(posts, []);
 });
+
+test("build does not depend on remote Google font fetching", () => {
+  const files = walkFiles("src").filter((file) => /\.(tsx?|mdx?)$/.test(file));
+  const combined = files.map((file) => read(file)).join("\n");
+
+  assert.doesNotMatch(combined, /next\/font\/google/);
+});

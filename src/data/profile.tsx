@@ -1,3 +1,10 @@
+import { Docker } from "@/components/ui/svgs/docker";
+import { Golang } from "@/components/ui/svgs/golang";
+import { Java } from "@/components/ui/svgs/java";
+import { Kubernetes } from "@/components/ui/svgs/kubernetes";
+import { Postgresql } from "@/components/ui/svgs/postgresql";
+import { Python } from "@/components/ui/svgs/python";
+
 export type ContactLink = {
   name: string;
   url: string;
@@ -167,34 +174,62 @@ export const PROFILE = {
   skillGroups: [
     {
       title: "编程语言",
-      skills: ["Python", "Golang", "Bash", "C++", "Java"],
+      skills: [
+        { name: "Python", icon: Python },
+        { name: "Golang", icon: Golang },
+        { name: "Bash" },
+        { name: "C++" },
+        { name: "Java", icon: Java },
+      ],
     },
     {
       title: "分布式训练框架",
-      skills: ["Megatron-LM", "FSDP", "DeepSpeed"],
+      skills: [
+        { name: "Megatron-LM" },
+        { name: "FSDP" },
+        { name: "DeepSpeed" },
+      ],
     },
     {
       title: "强化学习框架",
-      skills: ["VeRL", "Slime", "ROLL", "Areal"],
+      skills: [
+        { name: "VeRL" },
+        { name: "Slime" },
+        { name: "ROLL" },
+        { name: "Areal" },
+      ],
     },
     {
       title: "云原生",
-      skills: ["Docker", "Kubernetes", "Containerd", "Helm", "CRIU"],
+      skills: [
+        { name: "Docker", icon: Docker },
+        { name: "Kubernetes", icon: Kubernetes },
+        { name: "Containerd" },
+        { name: "Helm" },
+        { name: "CRIU" },
+      ],
     },
     {
       title: "数据库 / 缓存 / 中间件",
-      skills: ["Etcd", "Mysql", "GaussDB", "Redis", "RocketMQ"],
+      skills: [
+        { name: "Etcd" },
+        { name: "Mysql" },
+        { name: "PostgreSQL", icon: Postgresql },
+        { name: "GaussDB" },
+        { name: "Redis" },
+        { name: "RocketMQ" },
+      ],
     },
     {
       title: "工程体系",
-      skills: ["Jenkins", "Git", "Maven"],
+      skills: [{ name: "Jenkins" }, { name: "Git" }, { name: "Maven" }],
     },
   ],
   skills: [
-    { name: "Python" },
-    { name: "Golang" },
-    { name: "Kubernetes" },
-    { name: "Docker" },
+    { name: "Python", icon: Python },
+    { name: "Golang", icon: Golang },
+    { name: "Kubernetes", icon: Kubernetes },
+    { name: "Docker", icon: Docker },
     { name: "Megatron-LM" },
     { name: "DeepSpeed" },
     { name: "VeRL" },

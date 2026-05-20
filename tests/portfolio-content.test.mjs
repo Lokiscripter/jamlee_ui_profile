@@ -73,3 +73,31 @@ test("build does not depend on remote Google font fetching", () => {
 
   assert.doesNotMatch(combined, /next\/font\/google/);
 });
+
+test("navbar section links navigate home from nested routes", () => {
+  const navbar = read("src/components/navbar.tsx");
+
+  for (const hash of ["home", "expertise", "work", "projects", "publications"]) {
+    assert.match(navbar, new RegExp(`href: "/#${hash}"`));
+    assert.doesNotMatch(navbar, new RegExp(`href: "#${hash}"`));
+  }
+});
+
+test("skills render data-driven technology icons", () => {
+  const profile = read("src/data/profile.tsx");
+  const page = read("src/app/page.tsx");
+
+  for (const iconName of [
+    "Python",
+    "Golang",
+    "Docker",
+    "Kubernetes",
+    "Java",
+    "Postgresql",
+  ]) {
+    assert.match(profile, new RegExp(`icon: ${iconName}`));
+  }
+
+  assert.match(page, /"icon" in skill/);
+  assert.match(page, /<SkillIcon/);
+});

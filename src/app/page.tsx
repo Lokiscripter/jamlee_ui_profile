@@ -10,19 +10,28 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { PROFILE } from "@/data/profile";
 import {
+  Activity,
   ArrowUpRight,
   BookOpen,
   Boxes,
   BriefcaseBusiness,
   Cpu,
+  Database,
+  Gauge,
   GraduationCap,
   Layers3,
   Mail,
+  Network,
   Sparkles,
+  Terminal,
+  Wrench,
+  Zap,
 } from "lucide-react";
 import Link from "next/link";
 
 const BLUR_FADE_DELAY = 0.04;
+const metricIcons = [Gauge, Network, Activity, Zap];
+const skillGroupIcons = [Terminal, Cpu, Sparkles, Boxes, Database, Wrench];
 
 const availableContacts = Object.values(PROFILE.contact.social).filter(
   (item) => item.url
@@ -82,17 +91,25 @@ export default function Page() {
 
       <section id="metrics" className="scroll-mt-24">
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-          {PROFILE.metrics.map((metric, index) => (
-            <BlurFade key={metric.label} delay={BLUR_FADE_DELAY * 4 + index * 0.04}>
-              <div className="flex h-full flex-col gap-2 rounded-lg border bg-card p-4">
-                <p className="text-sm text-muted-foreground">{metric.label}</p>
-                <p className="text-2xl font-semibold">{metric.headline}</p>
-                <p className="text-sm leading-6 text-muted-foreground">
-                  {metric.detail}
-                </p>
-              </div>
-            </BlurFade>
-          ))}
+          {PROFILE.metrics.map((metric, index) => {
+            const Icon = metricIcons[index] ?? Gauge;
+            return (
+              <BlurFade key={metric.label} delay={BLUR_FADE_DELAY * 4 + index * 0.04}>
+                <div className="flex h-full flex-col gap-3 rounded-lg border bg-card p-4">
+                  <div className="flex items-center justify-between gap-3">
+                    <p className="text-sm text-muted-foreground">{metric.label}</p>
+                    <span className="flex size-8 shrink-0 items-center justify-center rounded-md border bg-background text-muted-foreground">
+                      <Icon className="size-4" aria-hidden />
+                    </span>
+                  </div>
+                  <p className="text-2xl font-semibold">{metric.headline}</p>
+                  <p className="text-sm leading-6 text-muted-foreground">
+                    {metric.detail}
+                  </p>
+                </div>
+              </BlurFade>
+            );
+          })}
         </div>
       </section>
 
@@ -240,20 +257,38 @@ export default function Page() {
             <SectionHeading eyebrow="STACK" title="技术栈" />
           </BlurFade>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {PROFILE.skillGroups.map((group, index) => (
-              <BlurFade key={group.title} delay={BLUR_FADE_DELAY * 13 + index * 0.04}>
-                <div className="rounded-lg border bg-card p-5">
-                  <h3 className="font-semibold">{group.title}</h3>
-                  <div className="mt-4 flex flex-wrap gap-1.5">
-                    {group.skills.map((skill) => (
-                      <Badge key={skill} variant="secondary" className="rounded-md">
-                        {skill}
-                      </Badge>
-                    ))}
+            {PROFILE.skillGroups.map((group, index) => {
+              const Icon = skillGroupIcons[index] ?? Terminal;
+              return (
+                <BlurFade key={group.title} delay={BLUR_FADE_DELAY * 13 + index * 0.04}>
+                  <div className="h-full rounded-lg border bg-card p-5">
+                    <div className="flex items-center gap-3">
+                      <span className="flex size-9 shrink-0 items-center justify-center rounded-md border bg-background text-muted-foreground">
+                        <Icon className="size-4" aria-hidden />
+                      </span>
+                      <h3 className="font-semibold">{group.title}</h3>
+                    </div>
+                    <div className="mt-4 flex flex-wrap gap-1.5">
+                      {group.skills.map((skill) => {
+                        const SkillIcon = "icon" in skill ? skill.icon : null;
+                        return (
+                          <Badge
+                            key={skill.name}
+                            variant="secondary"
+                            className="h-7 gap-1.5 rounded-md px-2.5"
+                          >
+                            {SkillIcon ? (
+                              <SkillIcon className="size-3.5 shrink-0" aria-hidden />
+                            ) : null}
+                            <span>{skill.name}</span>
+                          </Badge>
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
-              </BlurFade>
-            ))}
+                </BlurFade>
+              );
+            })}
           </div>
         </div>
       </section>

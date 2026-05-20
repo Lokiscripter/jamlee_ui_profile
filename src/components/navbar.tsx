@@ -19,11 +19,11 @@ import {
 } from "lucide-react";
 
 const navItems = [
-  { href: "#home", icon: HomeIcon, label: "首页" },
-  { href: "#expertise", icon: Layers3, label: "能力" },
-  { href: "#work", icon: BriefcaseBusiness, label: "经历" },
-  { href: "#projects", icon: Cpu, label: "项目" },
-  { href: "#publications", icon: BookOpen, label: "相关工作" },
+  { href: "/#home", icon: HomeIcon, label: "首页" },
+  { href: "/#expertise", icon: Layers3, label: "能力" },
+  { href: "/#work", icon: BriefcaseBusiness, label: "经历" },
+  { href: "/#projects", icon: Cpu, label: "项目" },
+  { href: "/#publications", icon: BookOpen, label: "相关工作" },
   { href: "/blog", icon: FileText, label: "文章" },
 ];
 

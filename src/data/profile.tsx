@@ -25,12 +25,6 @@ export const PROFILE = {
   avatarUrl: "",
   metrics: [
     {
-      headline: "9+ 年系统工程经验",
-      label: "系统工程经验",
-      value: "9+ 年",
-      detail: "从传统计费系统到 Serverless 内核，再到大模型训练系统",
-    },
-    {
       headline: "4000 卡级训练优化经验",
       label: "训练优化规模",
       value: "4000 卡级",
@@ -47,6 +41,12 @@ export const PROFILE = {
       label: "冷启动优化",
       value: "92%",
       detail: "基于 CRIU 快照技术降低函数冷启动时延",
+    },
+    {
+      headline: "8+ 年系统工程经验",
+      label: "系统工程经验",
+      value: "8+ 年",
+      detail: "从传统计费系统到 Serverless 内核，再到大模型训练系统",
     },
   ],
   expertise: [

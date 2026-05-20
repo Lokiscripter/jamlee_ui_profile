@@ -32,7 +32,7 @@ test("profile data contains jamlee portfolio essentials", () => {
 
   for (const expected of [
     "jamlee",
-    "9+ 年系统工程经验",
+    "8+ 年系统工程经验",
     "4000 卡级训练优化经验",
     "32K 序列训练 MFU 达到 35.6%",
     "函数冷启动时延降低 92%",
@@ -42,6 +42,21 @@ test("profile data contains jamlee portfolio essentials", () => {
   ]) {
     assert.match(profile, new RegExp(escapeRegExp(expected)));
   }
+});
+
+test("metrics put system experience after cold start with eight-plus years", () => {
+  const profile = read("src/data/profile.tsx");
+  const trainingIndex = profile.indexOf("4000 卡级训练优化经验");
+  const longContextIndex = profile.indexOf("32K 序列训练 MFU 达到 35.6%");
+  const coldStartIndex = profile.indexOf("函数冷启动时延降低 92%");
+  const systemIndex = profile.indexOf("8+ 年系统工程经验");
+
+  assert.ok(trainingIndex >= 0);
+  assert.ok(longContextIndex > trainingIndex);
+  assert.ok(coldStartIndex > longContextIndex);
+  assert.ok(systemIndex > coldStartIndex);
+  assert.match(profile, /value: "8\+ 年"/);
+  assert.doesNotMatch(profile, /9\+ 年系统工程经验/);
 });
 
 test("generated project does not expose sample portfolio identity", () => {

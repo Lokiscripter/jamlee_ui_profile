@@ -86,13 +86,15 @@ export const PROFILE = {
       start: "2024.08",
       end: "至今",
       description:
-        "负责盘古基模预训练与强化学习训练系统研发，覆盖 RLHF、Agentic RL、异步 RL 框架与训练效率优化。",
+        "负责盘古基模预训练与强化学习训练系统研发，覆盖预训练框架需求开发、基模 MFU 优化、RLHF 与 Agentic RL 训练系统。",
       highlights: [
+        "负责 72B MoE 模型训练 MFU 提升，切换训练并行策略，使能 EP 分级通信与 Overlap 1F1B；8K 序列 4000 卡 MFU 30.5%，32K 序列 4000 卡 MFU 35.6%。",
+        "参与 718B MoE 的 drop&pad 切换 dropless 相关特性开发，迁移 DeepSeekV3 Auxiliary Loss Free 方案平衡专家负载。",
+        "引入 HELMET 评测集并完成盘古模型长序列能力适配，补足 NIAH、LongBench、InfiniteBench 在区分度、评测维度和数据丰富度上的不足。",
         "定位并修复 RL 框架历史精度问题，支持后训练规模 Scaling，评测效果提升 14%。",
         "设计并开发 Multi-Agent Agentic RL 训练引擎解耦方案，支持 Agent SFT 更新，落地 DeepDiver V2.0 Online RFT。",
         "主导 VeRL 框架先导验证，接入盘古训推系统，覆盖 7B/38B VL 及 72B MoE 模型的 math 场景 RL 训练穿刺。",
         "引入 mbridge 支持模型网络创建与 resharding，实现适配 pangu 前向的 sequence packing 并优化 CP 场景显存峰值；训推一致性 Pearson 系数 0.99+。",
-        "参与基于 Timely Dataflow 的流式异步 RL 框架开发，支持多任务并行与非阻塞调用；Staleness=2 下吞吐提升超 1 倍。",
         "优化 VeRL 开源 DAPO 算法在 RL 框架中的实现，构建统一 ReplayBuffer 组件，使用 Dynamic Sampling 提升样本利用率 30%+。",
       ],
     },
@@ -141,7 +143,7 @@ export const PROFILE = {
       active: true,
       description:
         "面向基模后训练的强化学习训练系统，支持多智能体、异步 RL、训推一致性验证和大规模训练效率优化。",
-      technologies: ["RLHF", "Agentic RL", "VeRL", "Dataflow"],
+      technologies: ["RLHF", "Agentic RL", "VeRL", "ReplayBuffer"],
       links: [],
       image: "",
       video: "",
@@ -152,8 +154,8 @@ export const PROFILE = {
       dates: "2024.08 - 2025.06",
       active: true,
       description:
-        "负责 72B MoE 模型训练 MFU 提升、718B MoE dropless 相关特性开发，以及长序列评测体系建设。",
-      technologies: ["MoE", "Megatron-LM", "MFU", "Long Context"],
+        "负责 72B MoE 训练 MFU 优化，切换并行策略并使能 EP 分级通信、Overlap 1F1B，将 8K 序列 4000 卡 MFU 提升到 30.5%，32K 序列 4000 卡 MFU 达到 35.6%；参与 718B MoE 从 drop&pad 到 dropless 的特性开发，迁移 DeepSeekV3 Auxiliary Loss Free 平衡专家负载；引入 HELMET 评测集并适配盘古长序列能力评估，补足 NIAH、LongBench、InfiniteBench 的评测局限。",
+      technologies: ["MoE", "Megatron-LM", "MFU", "HELMET"],
       links: [],
       image: "",
       video: "",

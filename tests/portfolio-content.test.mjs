@@ -101,3 +101,26 @@ test("skills render data-driven technology icons", () => {
   assert.match(page, /"icon" in skill/);
   assert.match(page, /<SkillIcon/);
 });
+
+test("profile highlights pretraining experience without Timely emphasis", () => {
+  const profile = read("src/data/profile.tsx");
+
+  for (const expected of [
+    "8K 序列 4000 卡 MFU 30.5%",
+    "EP 分级通信",
+    "Overlap 1F1B",
+    "718B MoE",
+    "dropless",
+    "DeepSeekV3 Auxiliary Loss Free",
+    "HELMET",
+    "NIAH",
+    "LongBench",
+    "InfiniteBench",
+  ]) {
+    assert.match(profile, new RegExp(escapeRegExp(expected)));
+  }
+
+  for (const forbidden of ["Timely Dataflow", "Staleness=2", "Dataflow"]) {
+    assert.doesNotMatch(profile, new RegExp(escapeRegExp(forbidden)));
+  }
+});

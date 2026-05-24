@@ -37,33 +37,33 @@ export const PROFILE = {
       detail: "32K 序列训练 MFU 达到 35.6%",
     },
     {
+      headline: "异步流式框架降低Rollout时长 75%",
+      label: "强化学习框架优化",
+      value: "时长降低 75%",
+      detail: "改造Multi-Agent的Agentic RL过程，异步流式Rollout，精度无损下提升训练效率",
+    },
+    {
       headline: "函数冷启动时延降低 92%",
       label: "冷启动优化",
       value: "92%",
       detail: "基于 CRIU 快照技术降低函数冷启动时延",
     },
-    {
-      headline: "8+ 年系统工程经验",
-      label: "系统工程经验",
-      value: "8+ 年",
-      detail: "从传统计费系统到 Serverless 内核，再到大模型训练系统",
-    },
   ],
   expertise: [
     {
-      title: "大模型后训练与强化学习训练系统",
+      title: "LLM强化学习训练系统",
       description:
         "覆盖 RLHF、Agentic RL、异步 RL、DeepDiver Online RFT、VeRL 先导验证与样本利用率优化。",
       keywords: ["RLHF", "Agentic RL", "VeRL", "Online RFT"],
     },
     {
-      title: "分布式训练效率优化",
+      title: "LLM预训练效率优化",
       description:
         "围绕 MoE、长序列、sequence packing、resharding、训推一致性和 MFU 提升做系统级优化。",
       keywords: ["MoE", "MFU", "Long Context", "Resharding"],
     },
     {
-      title: "Serverless 内核与云服务工程化",
+      title: "Serverless 内核与云服务工程",
       description:
         "主导 GPU 函数、WebSocket 函数、ServiceBridge、资源隔离、调度和冷启动优化等核心能力。",
       keywords: ["Serverless", "GPU", "CRIU", "Kubernetes"],

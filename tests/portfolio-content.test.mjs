@@ -32,9 +32,9 @@ test("profile data contains jamlee portfolio essentials", () => {
 
   for (const expected of [
     "jamlee",
-    "8+ 年系统工程经验",
     "4000 卡级训练优化经验",
     "32K 序列训练 MFU 达到 35.6%",
+    "异步流式框架降低Rollout时长 75%",
     "函数冷启动时延降低 92%",
     "盘古基模强化学习训练系统",
     "FunctionGraph 元戎 Serverless 内核",
@@ -44,19 +44,22 @@ test("profile data contains jamlee portfolio essentials", () => {
   }
 });
 
-test("metrics put system experience after cold start with eight-plus years", () => {
+test("metrics emphasize training, rollout, and cold-start outcomes", () => {
   const profile = read("src/data/profile.tsx");
+  const page = read("src/app/page.tsx");
   const trainingIndex = profile.indexOf("4000 卡级训练优化经验");
   const longContextIndex = profile.indexOf("32K 序列训练 MFU 达到 35.6%");
+  const rolloutIndex = profile.indexOf("异步流式框架降低Rollout时长 75%");
   const coldStartIndex = profile.indexOf("函数冷启动时延降低 92%");
-  const systemIndex = profile.indexOf("8+ 年系统工程经验");
 
   assert.ok(trainingIndex >= 0);
   assert.ok(longContextIndex > trainingIndex);
-  assert.ok(coldStartIndex > longContextIndex);
-  assert.ok(systemIndex > coldStartIndex);
-  assert.match(profile, /value: "8\+ 年"/);
+  assert.ok(rolloutIndex > longContextIndex);
+  assert.ok(coldStartIndex > rolloutIndex);
+  assert.match(profile, /value: "时长降低 75%"/);
+  assert.match(page, /value: 75, suffix: "% Rollout"/);
   assert.doesNotMatch(profile, /9\+ 年系统工程经验/);
+  assert.doesNotMatch(profile, /8\+ 年系统工程经验/);
 });
 
 test("generated project does not expose sample portfolio identity", () => {

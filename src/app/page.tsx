@@ -39,14 +39,14 @@ const metricIcons = [Gauge, Network, Activity, Zap];
 const metricFigures = [
   { value: 4000, suffix: " 卡级", decimalPlaces: 0 },
   { value: 35.6, suffix: "% MFU", decimalPlaces: 1 },
+  { value: 75, suffix: "% Rollout", decimalPlaces: 0 },
   { value: 92, suffix: "%", decimalPlaces: 0 },
-  { value: 8, suffix: "+ 年", decimalPlaces: 0 },
 ];
 const skillGroupIcons = [Terminal, Cpu, Sparkles, Boxes, Database, Wrench];
 const projectSignals = [
-  ["14% 评测提升", "30%+ 样本利用率", "Pearson 0.99+"],
-  ["4000 卡训练", "35.6% MFU", "HELMET 评测"],
-  ["32% 成本降低", "92% 冷启动优化", "GPU 函数"],
+  ["异步流式RL框架", "DAPO算法优化", "训推一致性"],
+  ["4000 卡MoE预训练", "20.2% to 35.6% MFU", "长序列评测"],
+  ["云服务 32% 成本降低", "Serverless实例 92% 冷启动优化", "GPU 函数创收"],
 ];
 const projectSummaries = [
   "围绕基模后训练的 RL 训练系统，覆盖精度修复、Multi-Agent Agentic RL 训练引擎、VeRL 接入、DAPO 优化与 ReplayBuffer 样本利用率提升。",

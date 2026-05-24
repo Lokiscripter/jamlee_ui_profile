@@ -117,6 +117,30 @@ test("skills render data-driven technology icons", () => {
   assert.match(page, /<SkillIcon/);
 });
 
+test("homepage uses Magic UI components to break up dense text", () => {
+  const page = read("src/app/page.tsx");
+
+  for (const componentPath of [
+    "src/components/magicui/bento-grid.tsx",
+    "src/components/magicui/border-beam.tsx",
+    "src/components/magicui/marquee.tsx",
+    "src/components/magicui/number-ticker.tsx",
+  ]) {
+    assert.ok(existsSync(path.join(root, componentPath)));
+  }
+
+  for (const expected of [
+    "BentoGrid",
+    "BentoCard",
+    "BorderBeam",
+    "FlickeringGrid",
+    "Marquee",
+    "NumberTicker",
+  ]) {
+    assert.match(page, new RegExp(escapeRegExp(expected)));
+  }
+});
+
 test("profile highlights pretraining experience without Timely emphasis", () => {
   const profile = read("src/data/profile.tsx");
 

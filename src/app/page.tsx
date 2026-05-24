@@ -1,5 +1,10 @@
+import { BentoCard, BentoGrid } from "@/components/magicui/bento-grid";
 import BlurFade from "@/components/magicui/blur-fade";
 import BlurFadeText from "@/components/magicui/blur-fade-text";
+import { BorderBeam } from "@/components/magicui/border-beam";
+import { FlickeringGrid } from "@/components/magicui/flickering-grid";
+import { Marquee } from "@/components/magicui/marquee";
+import { NumberTicker } from "@/components/magicui/number-ticker";
 import {
   Accordion,
   AccordionContent,
@@ -31,10 +36,24 @@ import Link from "next/link";
 
 const BLUR_FADE_DELAY = 0.04;
 const metricIcons = [Gauge, Network, Activity, Zap];
+const metricFigures = [
+  { value: 4000, suffix: " 卡级", decimalPlaces: 0 },
+  { value: 35.6, suffix: "% MFU", decimalPlaces: 1 },
+  { value: 92, suffix: "%", decimalPlaces: 0 },
+  { value: 8, suffix: "+ 年", decimalPlaces: 0 },
+];
 const skillGroupIcons = [Terminal, Cpu, Sparkles, Boxes, Database, Wrench];
+const projectSignals = [
+  ["14% 评测提升", "30%+ 样本利用率", "Pearson 0.99+"],
+  ["4000 卡训练", "35.6% MFU", "HELMET 评测"],
+  ["32% 成本降低", "92% 冷启动优化", "GPU 函数"],
+];
 
 const availableContacts = Object.values(PROFILE.contact.social).filter(
   (item) => item.url
+);
+const stackItems = PROFILE.skillGroups.flatMap((group) =>
+  group.skills.map((skill) => ({ ...skill, group: group.title }))
 );
 
 function SectionHeading({
@@ -55,12 +74,20 @@ function SectionHeading({
 export default function Page() {
   return (
     <main className="relative flex min-h-dvh flex-col gap-16">
-      <section id="home" className="scroll-mt-24">
-        <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+      <section id="home" className="relative scroll-mt-24 overflow-hidden py-3">
+        <FlickeringGrid
+          className="absolute inset-0 -z-10 opacity-40 [mask-image:linear-gradient(to_bottom,black,transparent_86%)]"
+          color="var(--foreground)"
+          flickerChance={0.12}
+          gridGap={8}
+          maxOpacity={0.18}
+          squareSize={3}
+        />
+        <div className="relative flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div className="order-2 flex flex-col gap-5 md:order-1">
             <BlurFadeText
               delay={BLUR_FADE_DELAY}
-              className="text-4xl font-semibold sm:text-5xl"
+              className="max-w-2xl text-4xl font-semibold sm:text-5xl"
               yOffset={8}
               text={PROFILE.name}
             />
@@ -79,12 +106,28 @@ export default function Page() {
               delay={BLUR_FADE_DELAY * 3}
               text={PROFILE.description}
             />
+            <BlurFade delay={BLUR_FADE_DELAY * 4}>
+              <div className="flex flex-wrap gap-1.5">
+                {["Pangu", "RLHF", "MoE", "Serverless"].map((keyword) => (
+                  <Badge
+                    key={keyword}
+                    variant="secondary"
+                    className="h-7 rounded-md bg-background/80 px-3 backdrop-blur"
+                  >
+                    {keyword}
+                  </Badge>
+                ))}
+              </div>
+            </BlurFade>
           </div>
           <BlurFade delay={BLUR_FADE_DELAY} className="order-1 md:order-2">
-            <Avatar className="size-24 rounded-full border shadow-lg ring-4 ring-muted md:size-32">
-              <AvatarImage alt={PROFILE.name} src={PROFILE.avatarUrl} />
-              <AvatarFallback>{PROFILE.initials}</AvatarFallback>
-            </Avatar>
+            <div className="relative rounded-full">
+              <Avatar className="size-24 rounded-full border shadow-lg ring-4 ring-muted md:size-32">
+                <AvatarImage alt={PROFILE.name} src={PROFILE.avatarUrl} />
+                <AvatarFallback>{PROFILE.initials}</AvatarFallback>
+              </Avatar>
+              <BorderBeam borderWidth={2} duration={10} radius={999} size={60} />
+            </div>
           </BlurFade>
         </div>
       </section>
@@ -93,19 +136,31 @@ export default function Page() {
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {PROFILE.metrics.map((metric, index) => {
             const Icon = metricIcons[index] ?? Gauge;
+            const figure = metricFigures[index] ?? metricFigures[0];
             return (
               <BlurFade key={metric.label} delay={BLUR_FADE_DELAY * 4 + index * 0.04}>
-                <div className="flex h-full flex-col gap-3 rounded-lg border bg-card p-4">
+                <div className="relative flex h-full flex-col gap-3 overflow-hidden rounded-lg border bg-card p-4">
                   <div className="flex items-center justify-between gap-3">
                     <p className="text-sm text-muted-foreground">{metric.label}</p>
                     <span className="flex size-8 shrink-0 items-center justify-center rounded-md border bg-background text-muted-foreground">
                       <Icon className="size-4" aria-hidden />
                     </span>
                   </div>
-                  <p className="text-2xl font-semibold">{metric.headline}</p>
+                  <div className="flex items-end gap-1 text-3xl font-semibold leading-none">
+                    <NumberTicker
+                      decimalPlaces={figure.decimalPlaces}
+                      delay={index * 0.08}
+                      value={figure.value}
+                    />
+                    <span className="pb-0.5 text-base font-medium text-muted-foreground">
+                      {figure.suffix}
+                    </span>
+                  </div>
+                  <p className="text-sm font-medium">{metric.headline}</p>
                   <p className="text-sm leading-6 text-muted-foreground">
                     {metric.detail}
                   </p>
+                  {index === 0 ? <BorderBeam duration={9} size={120} /> : null}
                 </div>
               </BlurFade>
             );
@@ -208,21 +263,22 @@ export default function Page() {
           <BlurFade delay={BLUR_FADE_DELAY * 10}>
             <SectionHeading eyebrow="PROJECTS" title="项目经历" />
           </BlurFade>
-          <div className="grid grid-cols-1 gap-3">
-            {PROFILE.projects.map((project, index) => (
-              <BlurFade key={project.title} delay={BLUR_FADE_DELAY * 11 + index * 0.04}>
-                <article className="rounded-lg border bg-card p-5">
-                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                    <div className="flex min-w-0 gap-3">
-                      <div className="mt-1 flex size-9 shrink-0 items-center justify-center rounded-md border bg-background text-muted-foreground">
-                        <Cpu className="size-4" aria-hidden />
-                      </div>
-                      <div className="min-w-0">
-                        <h3 className="font-semibold">{project.title}</h3>
-                        <p className="mt-1 text-xs text-muted-foreground">{project.dates}</p>
-                      </div>
-                    </div>
-                    {project.href ? (
+          <BentoGrid>
+            {PROFILE.projects.map((project, index) => {
+              const signals = projectSignals[index] ?? [];
+              return (
+                <BlurFade
+                  key={project.title}
+                  className={index === 1 ? "md:col-span-6" : "md:col-span-3"}
+                  delay={BLUR_FADE_DELAY * 11 + index * 0.04}
+                >
+                  <BentoCard
+                    className="h-full"
+                    description={project.description}
+                    icon={Cpu}
+                    name={project.title}
+                    cta={
+                      project.href ? (
                       <Link
                         href={project.href}
                         target="_blank"
@@ -232,22 +288,34 @@ export default function Page() {
                       >
                         <ArrowUpRight className="size-4" aria-hidden />
                       </Link>
-                    ) : null}
-                  </div>
-                  <p className="mt-4 text-sm leading-6 text-muted-foreground">
-                    {project.description}
-                  </p>
-                  <div className="mt-4 flex flex-wrap gap-1.5">
-                    {project.technologies.map((technology) => (
-                      <Badge key={technology} variant="outline" className="rounded-md">
-                        {technology}
-                      </Badge>
-                    ))}
-                  </div>
-                </article>
-              </BlurFade>
-            ))}
-          </div>
+                      ) : null
+                    }
+                  >
+                    <div className="mt-auto flex flex-col gap-4">
+                      <div className="flex flex-wrap gap-2">
+                        {signals.map((signal) => (
+                          <div
+                            key={signal}
+                            className="min-w-32 flex-1 whitespace-nowrap rounded-md border bg-background/70 px-3 py-2 text-sm font-medium"
+                          >
+                            {signal}
+                          </div>
+                        ))}
+                      </div>
+                      <div className="flex flex-wrap gap-1.5">
+                        {project.technologies.map((technology) => (
+                          <Badge key={technology} variant="outline" className="rounded-md">
+                            {technology}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                    {index === 1 ? <BorderBeam delay={1.4} duration={10} size={150} /> : null}
+                  </BentoCard>
+                </BlurFade>
+              );
+            })}
+          </BentoGrid>
         </div>
       </section>
 
@@ -255,6 +323,29 @@ export default function Page() {
         <div className="flex flex-col gap-6">
           <BlurFade delay={BLUR_FADE_DELAY * 12}>
             <SectionHeading eyebrow="STACK" title="技术栈" />
+          </BlurFade>
+          <BlurFade delay={BLUR_FADE_DELAY * 12.5}>
+            <div className="relative overflow-hidden rounded-lg border bg-card py-3">
+              <Marquee pauseOnHover repeat={3} className="[--duration:32s] [--gap:0.5rem]">
+                {stackItems.map((skill) => {
+                  const SkillIcon = "icon" in skill ? skill.icon : null;
+                  return (
+                    <Badge
+                      key={`${skill.group}-${skill.name}`}
+                      variant="secondary"
+                      className="h-8 gap-1.5 rounded-md bg-background px-3"
+                    >
+                      {SkillIcon ? (
+                        <SkillIcon className="size-3.5 shrink-0" aria-hidden />
+                      ) : null}
+                      <span>{skill.name}</span>
+                    </Badge>
+                  );
+                })}
+              </Marquee>
+              <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-card" />
+              <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-card" />
+            </div>
           </BlurFade>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {PROFILE.skillGroups.map((group, index) => {

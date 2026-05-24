@@ -48,6 +48,11 @@ const projectSignals = [
   ["4000 卡训练", "35.6% MFU", "HELMET 评测"],
   ["32% 成本降低", "92% 冷启动优化", "GPU 函数"],
 ];
+const projectSummaries = [
+  "围绕基模后训练的 RL 训练系统，覆盖精度修复、Multi-Agent Agentic RL 训练引擎、VeRL 接入、DAPO 优化与 ReplayBuffer 样本利用率提升。",
+  "围绕 72B/718B MoE 预训练效率，覆盖并行策略切换、EP 分级通信、Overlap 1F1B、dropless 迁移与 HELMET 长序列评测建设。",
+  "围绕 FunctionGraph 云服务内核，构建 GPU 函数、WebSocket 函数、ServiceBridge 与 CRIU 冷启动优化，支撑 Serverless 工程化落地。",
+];
 
 const availableContacts = Object.values(PROFILE.contact.social).filter(
   (item) => item.url
@@ -269,12 +274,12 @@ export default function Page() {
               return (
                 <BlurFade
                   key={project.title}
-                  className={index === 1 ? "md:col-span-6" : "md:col-span-3"}
+                  className="md:col-span-6"
                   delay={BLUR_FADE_DELAY * 11 + index * 0.04}
                 >
                   <BentoCard
                     className="h-full"
-                    description={project.description}
+                    description={projectSummaries[index] ?? project.description}
                     icon={Cpu}
                     name={project.title}
                     cta={

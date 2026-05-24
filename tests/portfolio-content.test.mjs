@@ -141,6 +141,17 @@ test("homepage uses Magic UI components to break up dense text", () => {
   }
 });
 
+test("project cards use equal width and balanced summaries", () => {
+  const page = read("src/app/page.tsx");
+
+  assert.match(page, /projectSummaries/);
+  assert.match(page, /description=\{projectSummaries\[index\] \?\? project\.description\}/);
+  assert.match(page, /精度修复/);
+  assert.match(page, /EP 分级通信/);
+  assert.doesNotMatch(page, /md:col-span-3/);
+  assert.doesNotMatch(page, /index === 1 \? "md:col-span-6"/);
+});
+
 test("profile highlights pretraining experience without Timely emphasis", () => {
   const profile = read("src/data/profile.tsx");
 

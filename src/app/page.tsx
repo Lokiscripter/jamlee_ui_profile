@@ -165,7 +165,6 @@ export default function Page() {
                   <p className="text-sm leading-6 text-muted-foreground">
                     {metric.detail}
                   </p>
-                  {index === 0 ? <BorderBeam duration={9} size={120} /> : null}
                 </div>
               </BlurFade>
             );
@@ -315,7 +314,6 @@ export default function Page() {
                         ))}
                       </div>
                     </div>
-                    {index === 1 ? <BorderBeam delay={1.4} duration={10} size={150} /> : null}
                   </BentoCard>
                 </BlurFade>
               );

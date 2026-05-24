@@ -152,6 +152,14 @@ test("project cards use equal width and balanced summaries", () => {
   assert.doesNotMatch(page, /index === 1 \? "md:col-span-6"/);
 });
 
+test("repeated cards do not single out one item with border beams", () => {
+  const page = read("src/app/page.tsx");
+
+  assert.doesNotMatch(page, /index === 0 \? <BorderBeam/);
+  assert.doesNotMatch(page, /index === 1 \? <BorderBeam/);
+  assert.match(page, /<BorderBeam borderWidth=\{2\}/);
+});
+
 test("profile highlights pretraining experience without Timely emphasis", () => {
   const profile = read("src/data/profile.tsx");
 

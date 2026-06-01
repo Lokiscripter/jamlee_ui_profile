@@ -83,7 +83,7 @@ export const PROFILE = {
       location: "深圳",
       title: "高级工程师",
       logoUrl: "",
-      start: "2024.08",
+      start: "2024.06",
       end: "至今",
       description:
         "负责盘古基模预训练与强化学习训练系统研发，覆盖预训练框架需求开发、基模 MFU 优化、RLHF 与 Agentic RL 训练系统。",
@@ -105,8 +105,8 @@ export const PROFILE = {
       location: "深圳",
       title: "工程师 / 高级工程师",
       logoUrl: "",
-      start: "2021.09",
-      end: "2024.08",
+      start: "2020.09",
+      end: "2024.06",
       description:
         "负责 FunctionGraph 元戎 Serverless 内核特性设计与开发，聚焦函数运行时、调度、资源隔离与云服务工程化。",
       highlights: [
@@ -124,7 +124,7 @@ export const PROFILE = {
       title: "助理工程师 / 工程师",
       logoUrl: "",
       start: "2017.09",
-      end: "2021.09",
+      end: "2020.09",
       description:
         "负责运营商计费软件的部署特性开发，推进大型传统系统的容器化、微服务化与可靠性交付。",
       highlights: [
@@ -151,7 +151,7 @@ export const PROFILE = {
     {
       title: "盘古基模预训练系统",
       href: "",
-      dates: "2024.08 - 2025.06",
+      dates: "2024.06 - 2025.06",
       active: true,
       description:
         "负责 72B MoE 训练 MFU 优化，切换并行策略并使能 EP 分级通信、Overlap 1F1B，将 8K 序列 4000 卡 MFU 提升到 30.5%，32K 序列 4000 卡 MFU 达到 35.6%；参与 718B MoE 从 drop&pad 到 dropless 的特性开发，迁移 DeepSeekV3 Auxiliary Loss Free 平衡专家负载；引入 HELMET 评测集并适配盘古长序列能力评估，补足 NIAH、LongBench、InfiniteBench 的评测局限。",
@@ -163,7 +163,7 @@ export const PROFILE = {
     {
       title: "FunctionGraph 元戎 Serverless 内核",
       href: "",
-      dates: "2021.09 - 2024.08",
+      dates: "2020.09 - 2024.06",
       active: true,
       description:
         "围绕 GPU 函数、WebSocket 函数、ServiceBridge 和函数冷启动优化构建云服务内核能力。",
